@@ -1,10 +1,10 @@
 FROM nginx:1.27-alpine
 
-# Listens on $PORT if the platform sets one, otherwise 80.
-ENV PORT=80
+# Listens on $PORT if the platform sets one, otherwise 8080 (Outplane default).
+ENV PORT=8080
 
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 COPY index.html /usr/share/nginx/html/index.html
 COPY images /usr/share/nginx/html/images
 
-EXPOSE 80
+EXPOSE 8080

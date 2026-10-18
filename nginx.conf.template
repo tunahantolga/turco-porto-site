@@ -7,11 +7,15 @@ server {
     index index.html;
 
     gzip on;
-    gzip_types text/html text/css application/javascript image/svg+xml;
+    gzip_types text/html text/css application/javascript image/svg+xml application/xml text/plain application/manifest+json;
 
     location /images/ {
         expires 30d;
         add_header Cache-Control "public";
+    }
+
+    location = /index.html {
+        add_header Cache-Control "no-cache";
     }
 
     location / {

@@ -2,4 +2,4 @@
 
 Website for Turco Porto, Turkish home cooking popping up around Porto.
 
-Static site, no build step: `index.html` plus `images/`. Hosted on Outplane, deployed from this repo's `main` branch.
+Static site: `index.html` plus `images/`, served by nginx (see `Dockerfile`). Outplane builds the Dockerfile and deploys from `main`.

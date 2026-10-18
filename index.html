@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Turco Porto</title>
+<meta name="description" content="Turkish home cooking, popping up around Porto. Pop-up dinners, Open House days and Kahvaltı Club by Tuna, from Mersin to Porto.">
+<meta property="og:title" content="Turco Porto">
+<meta property="og:description" content="Two tile cities. One table. Turkish home cooking, popping up around Porto.">
+<meta property="og:image" content="images/muhammara.jpg">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: full-width colour bands that alternate like a tiled wall; a max-width inner column; tile pattern as the recurring seam. */
+:root{
+  --biber:#8A2E1B;
+  --azulejo:#1D3C8F;
+  --ceu:#DFE6F5;
+  --papel:#FBFAF7;
+  --tinta:#1A1410;
+  --biber-deep:#6F2414;
+  --display:'Archivo', 'Arial Black', 'Helvetica Neue', sans-serif;
+  --body:'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --mono:'DM Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --wrap:1180px;
+  --tile:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%231D3C8F'/%3E%3Ccircle cx='0' cy='0' r='30' fill='%23FBFAF7'/%3E%3Ccircle cx='120' cy='0' r='30' fill='%23FBFAF7'/%3E%3Ccircle cx='0' cy='120' r='30' fill='%23FBFAF7'/%3E%3Ccircle cx='120' cy='120' r='30' fill='%23FBFAF7'/%3E%3Crect x='43' y='43' width='34' height='34' fill='%23FBFAF7'/%3E%3Crect x='43' y='43' width='34' height='34' fill='%23FBFAF7' transform='rotate(45 60 60)'/%3E%3Ccircle cx='60' cy='60' r='8' fill='%238A2E1B'/%3E%3C/svg%3E");
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--papel)}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--azulejo);outline-offset:3px}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
+@media (min-width:720px){.wrap{padding-left:max(40px, env(safe-area-inset-left,0px));padding-right:max(40px, env(safe-area-inset-right,0px))}}
+
+.display{font-family:var(--display);font-weight:900;font-stretch:125%;letter-spacing:-0.03em;line-height:0.9;margin:0;text-wrap:balance}
+.label{font-family:var(--mono);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;margin:0}
+.pt{font-size:0.86em;opacity:0.82}
+.lede{font-size:clamp(18px,2vw,22px);line-height:1.45;margin:0;max-width:34em}
+
+/* header */
+.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--papel);border-bottom:2px solid var(--tinta)}
+.site-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.site-head .logo img{height:40px;width:auto}
+.nav{display:flex;align-items:center;gap:22px}
+.nav a{text-decoration:none;font-family:var(--mono);font-size:13px;letter-spacing:0.12em;text-transform:uppercase}
+.nav a:hover{color:var(--biber)}
+.nav .btn{background:var(--biber);color:var(--papel);padding:11px 16px;min-height:44px;display:inline-flex;align-items:center}
+.nav .btn:hover{background:var(--biber-deep);color:var(--papel)}
+@media (max-width:760px){.nav .opt{display:none}}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:end;padding-block:56px 64px}
+.hero h1{font-size:clamp(52px,8.4vw,124px);color:var(--biber)}
+.hero h1 span{color:var(--azulejo);display:block}
+.hero-copy{display:flex;flex-direction:column;gap:28px;min-width:0}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px 22px;color:var(--azulejo)}
+.arch{border-radius:999px 999px 0 0;overflow:hidden;background:var(--ceu);aspect-ratio:4/5;max-width:100%}
+.arch img{width:100%;height:100%;object-fit:cover}
+.hero figure{margin:0;position:relative}
+.hero figcaption{position:absolute;left:14px;bottom:14px;background:var(--papel);color:var(--azulejo);padding:8px 12px}
+@media (max-width:820px){.hero .wrap{grid-template-columns:1fr;padding-block:36px 44px;gap:32px}.hero figure{max-width:460px}}
+
+.tiles{height:96px;background:var(--tile);background-size:96px 96px}
+.tiles.thin{height:48px;background-size:48px 48px}
+
+/* events */
+.events{background:var(--biber);color:var(--papel)}
+.events .wrap{padding-block:72px;display:flex;flex-direction:column;gap:36px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.section-head h2{font-size:clamp(40px,6vw,80px)}
+.event-list{list-style:none;margin:0;padding:0;border-top:2px solid var(--papel)}
+.event{display:grid;grid-template-columns:200px minmax(0,1fr) minmax(0,1fr);gap:28px;padding-block:26px;border-bottom:2px solid var(--papel);align-items:start}
+.event .date{font-family:var(--display);font-weight:900;font-stretch:125%;font-size:clamp(44px,5vw,64px);line-height:1;font-variant-numeric:tabular-nums}
+.event .when{color:var(--ceu);margin-top:8px}
+.event h3{font-size:clamp(24px,2.6vw,32px);font-weight:800;margin:0 0 4px;line-height:1.15}
+.event .where{color:var(--ceu);margin:0}
+.event p{margin:0}
+.event .how{display:flex;flex-direction:column;gap:10px}
+.event .tag{align-self:flex-start;background:var(--papel);color:var(--biber);padding:6px 10px}
+.tile-ph{height:auto;aspect-ratio:4/3;max-width:100%}
+@media (max-width:900px){.tile-ph{aspect-ratio:16/10}}
+.gallery{display:grid;grid-template-columns:1.7fr 1fr;gap:20px}
+.gallery figure{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.gallery img{width:100%;aspect-ratio:16/10;object-fit:cover;background:var(--biber-deep)}
+.gallery figure:last-child img{aspect-ratio:auto;height:100%;min-height:0;flex:1}
+.gallery figcaption{color:var(--ceu)}
+@media (max-width:700px){.gallery{grid-template-columns:1fr}.gallery figure:last-child img{aspect-ratio:4/3;height:auto}}
+.past{display:flex;flex-wrap:wrap;gap:8px 28px;color:var(--ceu)}
+@media (max-width:820px){.event{grid-template-columns:1fr;gap:12px}}
+
+/* formats */
+.formats .wrap{padding-block:80px;display:flex;flex-direction:column;gap:44px}
+.formats h2{font-size:clamp(40px,6vw,80px);color:var(--azulejo)}
+.format-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.format{display:flex;flex-direction:column;gap:16px;min-width:0}
+.format img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--ceu)}
+.format h3{font-family:var(--display);font-weight:900;font-stretch:125%;font-size:28px;line-height:1;margin:0;color:var(--biber)}
+.format p{margin:0}
+.format .label{color:var(--azulejo)}
+@media (max-width:900px){.format-grid{grid-template-columns:1fr;gap:40px}.format img{aspect-ratio:16/10}}
+
+/* food */
+.food{background:var(--azulejo);color:var(--papel)}
+.food .wrap{padding-block:80px;display:grid;grid-template-columns:0.85fr 1.15fr;gap:56px;align-items:start}
+.food h2{font-size:clamp(40px,5.6vw,76px)}
+.food-intro{display:flex;flex-direction:column;gap:24px;position:sticky;top:96px;min-width:0}
+.food-intro img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:999px 999px 0 0}
+.dish-list{list-style:none;margin:0;padding:0;border-top:2px solid var(--papel)}
+.dish{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:20px;padding-block:18px;border-bottom:2px solid var(--papel);align-items:baseline}
+.dish b{font-family:var(--display);font-weight:900;font-stretch:125%;font-size:clamp(22px,2.4vw,30px);line-height:1.05}
+.dish span{color:var(--ceu);font-size:16px;line-height:1.45}
+.dish .pt{display:block;opacity:0.75}
+.food .note{color:var(--ceu)}
+@media (max-width:860px){.food .wrap{grid-template-columns:1fr}.food-intro{position:static}.food-intro img{max-width:380px}.dish{grid-template-columns:1fr;gap:4px}}
+
+/* story */
+.story .wrap{padding-block:80px;display:grid;grid-template-columns:0.8fr 1.2fr;gap:56px;align-items:start}
+.story-pics{display:grid;grid-template-columns:1fr;gap:16px}
+.story-pics .arch{aspect-ratio:3/4}
+.story-pics .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.route{background:var(--azulejo);color:var(--papel);padding:20px;display:flex;flex-direction:column;justify-content:center;font-family:var(--display);font-weight:900;font-stretch:125%;font-size:clamp(18px,2vw,24px);line-height:1.15}
+.route span:last-child{color:var(--ceu)}
+.story-pics .row img{width:100%;height:100%;aspect-ratio:1/1;object-fit:cover}
+.story-copy{display:flex;flex-direction:column;gap:22px;min-width:0}
+.story h2{font-size:clamp(48px,7vw,96px);color:var(--biber)}
+.story-copy > p{margin:0;max-width:36em}
+.timeline{list-style:none;margin:8px 0 0;padding:0;border-top:3px solid var(--azulejo)}
+.timeline li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:20px;padding-block:16px;border-bottom:2px solid var(--azulejo)}
+.timeline .label{color:var(--azulejo);padding-top:4px}
+.timeline .pt{display:block;color:var(--azulejo);opacity:1;font-size:15px}
+.timeline li:last-child{border-bottom:0}
+.timeline li:last-child .label,.timeline li:last-child strong{color:var(--biber)}
+@media (max-width:860px){.story .wrap{grid-template-columns:1fr}.story-pics{max-width:460px}.timeline li{grid-template-columns:1fr;gap:4px}}
+
+/* two cities */
+.cities{background:var(--tile);background-size:96px 96px}
+.cities .wrap{padding-block:88px}
+.cities-card{background:var(--azulejo);color:var(--papel);padding:clamp(28px,5vw,56px);max-width:760px;display:flex;flex-direction:column;gap:20px}
+.cities h2{font-size:clamp(40px,6vw,80px)}
+.cities p{margin:0;max-width:32em}
+.cities .label{color:var(--ceu)}
+
+/* private */
+.private{background:var(--ceu)}
+.private .wrap{padding-block:80px;display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;align-items:start}
+.private h2{font-size:clamp(40px,6vw,80px);color:var(--azulejo)}
+.private-copy{display:flex;flex-direction:column;gap:22px;min-width:0}
+.private-copy ul{margin:0;padding:0;list-style:none;border-top:2px solid var(--azulejo)}
+.private-copy li{padding-block:12px;border-bottom:2px solid var(--azulejo);font-weight:600}
+.private-copy li .pt{font-weight:400;display:block;color:var(--azulejo);opacity:1}
+form{background:var(--papel);padding:clamp(20px,4vw,40px);display:grid;grid-template-columns:1fr 1fr;gap:18px 20px;border:2px solid var(--azulejo)}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field.full{grid-column:1 / -1}
+.field label{font-family:var(--mono);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--azulejo)}
+input,select,textarea{font:inherit;font-size:16px;color:var(--tinta);background:var(--papel);border:2px solid var(--tinta);border-radius:0;padding:11px 12px;min-height:48px;width:100%}
+textarea{min-height:120px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--azulejo);box-shadow:0 0 0 3px var(--ceu)}
+.submit{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px}
+button{font:inherit;cursor:pointer}
+.btn-main{background:var(--biber);color:var(--papel);border:0;padding:14px 22px;min-height:48px;font-family:var(--mono);font-size:14px;letter-spacing:0.12em;text-transform:uppercase}
+.btn-main:hover{background:var(--biber-deep)}
+.form-note{font-size:14px;color:var(--azulejo);margin:0}
+.form-status{grid-column:1 / -1;margin:0;font-weight:600;color:var(--azulejo)}
+.mail-line{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.mail-line code{font-family:var(--mono);font-size:15px;background:var(--papel);padding:6px 10px;user-select:all}
+.copy{background:transparent;border:2px solid var(--azulejo);color:var(--azulejo);padding:6px 12px;min-height:40px;font-family:var(--mono);font-size:12px;letter-spacing:0.12em;text-transform:uppercase}
+@media (max-width:860px){.private .wrap{grid-template-columns:1fr}}
+@media (max-width:520px){form{grid-template-columns:1fr}}
+
+/* footer */
+.site-foot{background:var(--biber);color:var(--papel)}
+.site-foot .wrap{padding-block:64px 48px;display:flex;flex-direction:column;gap:40px}
+.foot-top{display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap}
+.foot-top .display{font-size:clamp(44px,7vw,96px)}
+.foot-top img{height:84px;width:auto}
+.foot-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;border-top:2px solid var(--papel);padding-top:24px}
+.foot-cols p{margin:4px 0 0}
+.foot-cols .label{color:var(--ceu)}
+.foot-cols a{text-decoration-thickness:2px;text-underline-offset:4px}
+.fine{font-family:var(--mono);font-size:12px;letter-spacing:0.1em;color:var(--ceu);margin:0}
+@media (max-width:700px){.foot-cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Turco Porto, back to top"><img src="images/logo-biber.png" alt="Turco Porto" width="66" height="40"></a>
+    <nav class="nav" aria-label="Main">
+      <a class="opt" href="#tables">Next tables</a>
+      <a class="opt" href="#food">Food</a>
+      <a class="opt" href="#story">Story</a>
+      <a class="btn" href="#private">Private dinners</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="label" style="color:var(--azulejo)">Turkish home cooking · Porto</p>
+      <h1 class="display" id="hero-title">Two tile cities. <span>One table.</span></h1>
+      <p class="lede">Real Turkish home food, popping up around Porto. Dinners, open days and long Sunday breakfasts, cooked by Tuna from Mersin.<br><span class="pt">Cozinha turca de casa, em pop-up pelo Porto.</span></p>
+      <div class="hero-meta">
+        <span class="label">Matosinhos · Porto</span>
+        <span class="label">1 to 2 tables a month</span>
+        <span class="label">Afiyet olsun</span>
+      </div>
+    </div>
+    <figure>
+      <div class="arch"><img src="images/muhammara.jpg" alt="Twelve bowls of muhammara getting a drizzle of olive oil" width="900" height="1125"></div>
+      <figcaption class="label">Muhammara, twelve at a time</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="tiles" aria-hidden="true"></div>
+
+<section class="events" id="tables" aria-labelledby="tables-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="display" id="tables-title">Next tables.</h2>
+      <p class="label">Próximas mesas</p>
+    </div>
+    <ol class="event-list">
+      <li class="event">
+        <div><div class="date">25.10</div><div class="label when">Sun · 12:00 to 18:00</div></div>
+        <div>
+          <h3>Open House</h3>
+          <p class="where">At my home, Av. Meneres, Matosinhos</p>
+        </div>
+        <div class="how">
+          <p>Lahmacun all day, meze, mercimek and çay. Come in, stay at the door, or take it to the beach. At 17:00 we celebrate 29 Ekim early, so wear red and white.<br><span class="pt">Casa aberta. Sem reserva, é só aparecer.</span></p>
+          <span class="label tag">No booking needed</span>
+        </div>
+      </li>
+      <li class="event">
+        <div><div class="date">08.11</div><div class="label when">Sun · 11:00</div></div>
+        <div>
+          <h3>Kahvaltı Club</h3>
+          <p class="where">At my home, Matosinhos · 4 seats · Free</p>
+        </div>
+        <div class="how">
+          <p>A real Turkish breakfast for four people who have never had one. Menemen, çılbır, pişi, homemade simit, serpme and endless çay.<br><span class="pt">Um verdadeiro pequeno-almoço turco, para quatro.</span></p>
+          <a class="label tag" href="https://instagram.com/turcoporto" target="_blank" rel="noopener">DM "KAHVALTI" by 02.11</a>
+        </div>
+      </li>
+    </ol>
+    <div class="past">
+      <span class="label">Recent tables</span>
+      <span class="label">14.10 · Puzzle Bar, Gaia</span>
+      <span class="label">09.10 · Fino Golf Club, Matosinhos</span>
+    </div>
+  </div>
+</section>
+
+<section class="formats" aria-labelledby="formats-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="display" id="formats-title">Three ways to eat.</h2>
+      <p class="label" style="color:var(--azulejo)">Três formas de vir à mesa</p>
+    </div>
+    <div class="format-grid">
+      <article class="format">
+        <img src="images/guests.jpg" alt="Tuna with four guests after a pop-up dinner in Porto" width="800" height="600" loading="lazy">
+        <p class="label">Pop-up dinners</p>
+        <h3>A new spot each time</h3>
+        <p>One or two dinners a month in bars, clubs and gardens around Porto. A set menu, shared plates, long tables.<br><span class="pt">Jantares em sítios diferentes do Porto.</span></p>
+      </article>
+      <article class="format">
+        <img src="images/meze-box.jpg" alt="A takeaway box of sarma, pink hummus, a cracker and börek, with trays of börek and kadayıf behind" width="800" height="600" loading="lazy" style="object-position:50% 45%">
+        <p class="label">Open House</p>
+        <h3>My door, open all day</h3>
+        <p>My home in Matosinhos, open from noon. Eat inside, grab a plate at the door, or carry it to the beach three minutes away.<br><span class="pt">A minha casa, aberta o dia todo.</span></p>
+      </article>
+      <article class="format">
+        <div class="tiles tile-ph" aria-hidden="true"></div>
+        <p class="label">Kahvaltı Club</p>
+        <h3>Sunday breakfast, Turkish style</h3>
+        <p>A few guests at my table for a slow breakfast that runs three hours. Kahvaltı means "before coffee", and we read your cup at the end.<br><span class="pt">Pequeno-almoço turco, ao domingo.</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="food" id="food" aria-labelledby="food-title">
+  <div class="wrap">
+    <div class="food-intro">
+      <p class="label" style="color:var(--ceu)">What I cook</p>
+      <h2 class="display" id="food-title">Home food, not hotel food.</h2>
+      <p>Only the real flavours of Turkish cooking, from Mersin to Istanbul. The menu changes every time. These keep coming back.<br><span class="pt">Só os sabores verdadeiros da cozinha turca.</span></p>
+      <img src="images/kuzu-oven.jpg" alt="Fırın kuzu, two lamb shoulders with rosemary, coming out of the oven" width="700" height="700" loading="lazy" style="object-position:50% 55%">
+    </div>
+    <ul class="dish-list">
+      <li class="dish"><b>Lahmacun</b><span>Thin, crisp flatbread with spiced minced meat, rolled up with parsley and lemon.<span class="pt">Pão fino e estaladiço com carne picada.</span></span></li>
+      <li class="dish"><b>Muhammara</b><span>Roasted red pepper, walnut and pomegranate molasses. Smoky, sweet, a little hot.<span class="pt">Pimento assado, noz e melaço de romã.</span></span></li>
+      <li class="dish"><b>Tereyağlı humus</b><span>Hummus finished with warm spiced butter.<span class="pt">Húmus com manteiga quente e especiarias.</span></span></li>
+      <li class="dish"><b>Çiğ köfte</b><span>Bulgur kneaded with pepper paste and spices, wrapped in lettuce.<span class="pt">Bulgur com pasta de pimento, em alface.</span></span></li>
+      <li class="dish"><b>Mercimek çorbası</b><span>Red lentil soup with lemon and chilli butter.<span class="pt">Sopa de lentilhas vermelhas com limão.</span></span></li>
+      <li class="dish"><b>Fırın kuzu</b><span>Slow oven lamb on iç pilav.<span class="pt">Borrego no forno sobre iç pilav.</span></span></li>
+      <li class="dish"><b>Şiş köfte</b><span>Grilled spiced meat skewers.<span class="pt">Espetadas de carne picada grelhadas.</span></span></li>
+      <li class="dish"><b>Sütlaç &amp; lokma</b><span>Baked rice pudding, and small fried doughs in syrup.<span class="pt">Arroz doce turco e bolinhas fritas em calda.</span></span></li>
+      <li class="dish"><b>Çay &amp; Türk kahvesi</b><span>Tea refilled all day. Coffee at the end, cup reading included.<span class="pt">Chá sem fim e café turco no fim.</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="story" id="story" aria-labelledby="story-title">
+  <div class="wrap">
+    <div class="story-pics">
+      <div class="arch"><img src="images/tuna-kitchen.jpg" alt="Tuna in his apron at the stove, holding a spoon of pilav" width="700" height="933" loading="lazy" style="object-position:50% 30%"></div>
+      <div class="row">
+        <img src="images/parents.jpg" alt="Tuna with his parents" width="400" height="400" loading="lazy">
+        <div class="route" aria-label="Mersin to Istanbul to Porto"><span>Mersin</span><span>→ Istanbul</span><span>→ Porto</span></div>
+      </div>
+    </div>
+    <div class="story-copy">
+      <p class="label" style="color:var(--azulejo)">Who cooks</p>
+      <h2 class="display" id="story-title">I'm Tuna.</h2>
+      <p class="lede">Born in Mersin, on Turkey's Mediterranean coast, one of the country's richest food cities. Almost eight years in Istanbul, and Porto has been home for three.<br><span class="pt">Nasci em Mersin. Vivi quase 8 anos em Istambul e há 3 que o Porto é casa.</span></p>
+      <p>By day I work in tech with B2B software companies. My love for cooking goes back to university, and Turco Porto is where it finally gets a table.</p>
+      <ol class="timeline">
+        <li><span class="label">Jan 2022</span><span>In Istanbul, I launched a sugar free peanut butter brand with five flavours.<span class="pt">Uma marca de manteiga de amendoim sem açúcar.</span></span></li>
+        <li><span class="label">Feb 2023</span><span>Moved to Porto for a master's at Porto Business School and started making meze at home, to order.<span class="pt">Mestrado no Porto e meze feito em casa.</span></span></li>
+        <li><span class="label">Sep 2025</span><span>Culinary arts at Escola de Hotelaria e Turismo do Porto. Four months that changed the way I cook.<span class="pt">Artes Culinárias no Porto.</span></span></li>
+        <li><span class="label">Mar 2026</span><strong>The first Turco Porto pop-up. Growing step by step ever since.<span class="pt" style="font-weight:400">O primeiro pop-up. Desde então, passo a passo.</span></strong></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="cities" aria-labelledby="cities-title">
+  <div class="wrap">
+    <div class="cities-card">
+      <p class="label">İznik × Azulejo</p>
+      <h2 class="display" id="cities-title">Two tile cities.</h2>
+      <p>Istanbul and Porto share a lot: tiles, bridges, a river, and tables where nobody eats in a hurry.<br><span class="pt">Istambul e o Porto: azulejos, pontes, um rio e mesas sem pressa.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="private" id="private" aria-labelledby="private-title">
+  <div class="wrap">
+    <div class="private-copy">
+      <p class="label" style="color:var(--azulejo)">Private dinners &amp; catering</p>
+      <h2 class="display" id="private-title">Your table, my kitchen.</h2>
+      <p class="lede">I cook for private dinners, celebrations and team lunches around Porto. Tell me the date and the people, and I will come back with a menu.<br><span class="pt">Jantares privados, festas e catering. Diga-me a data e quantas pessoas.</span></p>
+      <ul>
+        <li>Dinner at your home<span class="pt">Jantar em sua casa</span></li>
+        <li>Birthdays and celebrations<span class="pt">Aniversários e festas</span></li>
+        <li>Team lunches and company events<span class="pt">Almoços de equipa e eventos de empresa</span></li>
+      </ul>
+    </div>
+    <form id="request-form" novalidate>
+      <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required></div>
+      <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="f-date">Date</label><input id="f-date" name="date" type="date"></div>
+      <div class="field"><label for="f-guests">Guests</label><input id="f-guests" name="guests" type="number" min="1" inputmode="numeric" placeholder="e.g. 12"></div>
+      <div class="field full"><label for="f-type">What is it for?</label>
+        <select id="f-type" name="type">
+          <option>Private dinner at home</option>
+          <option>Birthday or celebration</option>
+          <option>Team lunch or company event</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="field full"><label for="f-msg">Tell me more</label><textarea id="f-msg" name="message" placeholder="Where, any allergies, dishes you'd love"></textarea></div>
+      <div class="submit">
+        <button class="btn-main" type="submit">Send request</button>
+        <p class="form-note">Opens your email app with everything filled in.</p>
+      </div>
+      <p class="form-status" id="form-status" role="status" hidden></p>
+      <div class="field full mail-line">
+        <span class="form-note">Or write to</span><code id="mail-addr">hey@techsalestr.com</code><button class="copy" type="button" id="copy-mail">Copy</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<div class="tiles thin" aria-hidden="true"></div>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <p class="display">Afiyet olsun!</p>
+      <img src="images/logo-papel.png" alt="Turco Porto" width="138" height="84">
+    </div>
+    <div class="foot-cols">
+      <div><p class="label">Instagram</p><p><a href="https://instagram.com/turcoporto" target="_blank" rel="noopener">@turcoporto</a></p></div>
+      <div><p class="label">Where</p><p>Pop-ups around Porto.<br>Home base in Matosinhos.</p></div>
+      <div><p class="label">Contact</p><p><a href="#private">Private dinners &amp; catering</a></p></div>
+    </div>
+    <p class="fine">Turco Porto · Turkish home cooking · Porto, Portugal</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var EMAIL = 'hey@techsalestr.com';
+  var form = document.getElementById('request-form');
+  var status = document.getElementById('form-status');
+  document.getElementById('mail-addr').textContent = EMAIL;
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = form.name.value.trim(), email = form.email.value.trim();
+    if(!name || !email || !/^\S+@\S+\.\S+$/.test(email)){
+      status.hidden = false;
+      status.textContent = 'Please add your name and a valid email so I can reply.';
+      (!name ? form.name : form.email).focus();
+      return;
+    }
+    var lines = [
+      'Name: ' + name,
+      'Email: ' + email,
+      'Date: ' + (form.date.value || 'not set yet'),
+      'Guests: ' + (form.guests.value || 'not sure yet'),
+      'For: ' + form.type.value,
+      '',
+      form.message.value.trim()
+    ];
+    var subject = 'Turco Porto request: ' + form.type.value;
+    window.location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+    status.hidden = false;
+    status.textContent = 'Your email app should open with the request. If nothing happens, copy the address below.';
+  });
+
+  document.getElementById('copy-mail').addEventListener('click', function(){
+    var btn = this;
+    var done = function(){ btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy'; }, 1600); };
+    var fallback = function(){
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('mail-addr'));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(EMAIL).then(done, fallback);
+    } else { fallback(); }
+  });
+})();
+</script>
+</body>
+</html>

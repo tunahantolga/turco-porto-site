@@ -306,6 +306,13 @@ button{font:inherit;cursor:pointer}
 .btn-main:hover{background:var(--biber-deep)}
 .form-note{font-size:14px;color:var(--azulejo);margin:0}
 .form-status{grid-column:1 / -1;margin:0;font-weight:600;color:var(--azulejo)}
+.form-status.err{color:var(--biber)}
+.form-done{grid-column:1 / -1;display:flex;flex-direction:column;gap:10px}
+.form-done h3{font-family:var(--display);font-weight:900;font-stretch:125%;font-size:30px;line-height:1;margin:0;color:var(--azulejo)}
+.form-done p{margin:0}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.btn-main[disabled]{opacity:0.6;cursor:wait}
+form{position:relative}
 .mail-line{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;gap:10px}
 .mail-line code{font-family:var(--mono);font-size:15px;background:var(--papel);padding:6px 10px;user-select:all}
 .copy{background:transparent;border:2px solid var(--azulejo);color:var(--azulejo);padding:6px 12px;min-height:40px;font-family:var(--mono);font-size:12px;letter-spacing:0.12em;text-transform:uppercase}
@@ -522,9 +529,10 @@ button{font:inherit;cursor:pointer}
         </select>
       </div>
       <div class="field full"><label for="f-msg">Tell me more</label><textarea id="f-msg" name="message" placeholder="Where, any allergies, dishes you'd love"></textarea></div>
+      <div class="hp" aria-hidden="true"><label for="f-website">Leave this empty</label><input id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
       <div class="submit">
-        <button class="btn-main" type="submit">Send request</button>
-        <p class="form-note">Opens your email app with everything filled in.</p>
+        <button class="btn-main" type="submit" id="f-submit">Send request</button>
+        <p class="form-note">Goes straight to my inbox. I reply within two days.</p>
       </div>
       <p class="form-status" id="form-status" role="status" hidden></p>
       <div class="field full mail-line">
@@ -567,28 +575,39 @@ button{font:inherit;cursor:pointer}
   var status = document.getElementById('form-status');
   document.getElementById('mail-addr').textContent = EMAIL;
 
+  function val(n){ var el = form.elements[n]; return el ? String(el.value || '').trim() : ''; }
+  function say(msg, isErr){ status.hidden = false; status.textContent = msg; status.classList.toggle('err', !!isErr); }
+  function mailtoFallback(d){
+    var lines = ['Name: ' + d.name, 'Email: ' + d.email, 'Date: ' + (d.date || 'not set yet'), 'Guests: ' + (d.guests || 'not sure yet'), 'For: ' + d.type, '', d.message];
+    window.location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Turco Porto request: ' + d.type) + '&body=' + encodeURIComponent(lines.join('\n'));
+  }
+  var btn = document.getElementById('f-submit');
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    var name = form.name.value.trim(), email = form.email.value.trim();
-    if(!name || !email || !/^\S+@\S+\.\S+$/.test(email)){
-      status.hidden = false;
-      status.textContent = 'Please add your name and a valid email so I can reply.';
-      (!name ? form.name : form.email).focus();
-      return;
-    }
-    var lines = [
-      'Name: ' + name,
-      'Email: ' + email,
-      'Date: ' + (form.date.value || 'not set yet'),
-      'Guests: ' + (form.guests.value || 'not sure yet'),
-      'For: ' + form.type.value,
-      '',
-      form.message.value.trim()
-    ];
-    var subject = 'Turco Porto request: ' + form.type.value;
-    window.location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
-    status.hidden = false;
-    status.textContent = 'Your email app should open with the request. If nothing happens, copy the address below.';
+    var d = { name: val('name'), email: val('email'), date: val('date'), guests: val('guests'), type: val('type'), message: val('message'), website: val('website') };
+    if(!d.name){ say('Please add your name.', true); form.elements['name'].focus(); return; }
+    if(!/^\S+@\S+\.\S+$/.test(d.email)){ say('Please add a valid email so I can reply.', true); form.elements['email'].focus(); return; }
+    btn.disabled = true; btn.textContent = 'Sending...'; status.hidden = true;
+    fetch('/api/request', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) })
+      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return { status: r.status, body: j }; }); })
+      .then(function(res){
+        if(res.status === 200 && res.body.ok){
+          var done = document.createElement('div'); done.className = 'form-done'; done.setAttribute('role', 'status');
+          var h = document.createElement('h3'); h.textContent = 'Teşekkürler, ' + d.name.split(' ')[0] + '!';
+          var p1 = document.createElement('p'); p1.textContent = 'Your request is in my inbox. I will reply to ' + d.email + ' within two days.';
+          var p2 = document.createElement('p'); p2.className = 'pt'; p2.lang = 'pt-PT'; p2.textContent = 'Obrigado! Respondo por email em dois dias.';
+          done.appendChild(h); done.appendChild(p1); done.appendChild(p2);
+          form.replaceChildren(done);
+          return;
+        }
+        if(res.status === 400 || res.status === 429){ say(res.body.error || 'Please check the form and try again.', true); return; }
+        throw new Error('server');
+      })
+      .catch(function(){
+        say('The form could not send just now, so your email app is opening with everything filled in. You can also write to ' + EMAIL + '.', true);
+        mailtoFallback(d);
+      })
+      .then(function(){ btn.disabled = false; btn.textContent = 'Send request'; });
   });
 
   document.getElementById('copy-mail').addEventListener('click', function(){

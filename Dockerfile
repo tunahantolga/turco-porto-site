@@ -1,11 +1,14 @@
-FROM nginx:1.27-alpine
+FROM python:3.12-alpine
 
-# Listens on $PORT if the platform sets one, otherwise 8080 (Outplane default).
-ENV PORT=8080
+# Outplane routes to 8080. The server reads $PORT if the platform sets one.
+ENV PORT=8080 PYTHONUNBUFFERED=1
+WORKDIR /app
 
-COPY nginx.conf.template /etc/nginx/templates/default.conf.template
-COPY index.html /usr/share/nginx/html/index.html
-COPY images /usr/share/nginx/html/images
-COPY favicon.ico robots.txt sitemap.xml site.webmanifest llms.txt /usr/share/nginx/html/
+COPY server.py /app/server.py
+COPY public /app/public
+
+RUN adduser -D web
+USER web
 
 EXPOSE 8080
+CMD ["python", "/app/server.py"]

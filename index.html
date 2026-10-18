@@ -193,16 +193,16 @@ a{color:inherit}
 @media (max-width:760px){.nav .opt{display:none}}
 
 /* hero */
-.hero .wrap{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:end;padding-block:56px 64px}
-.hero h1{font-size:clamp(52px,8.4vw,124px);color:var(--biber)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);gap:56px;align-items:center;padding-block:56px 64px}
+.hero h1{font-size:clamp(40px,5.6vw,88px);color:var(--biber)}
 .hero h1 span{color:var(--azulejo);display:block}
 .hero-copy{display:flex;flex-direction:column;gap:28px;min-width:0}
 .hero-meta{display:flex;flex-wrap:wrap;gap:10px 22px;color:var(--azulejo)}
 .arch{border-radius:999px 999px 0 0;overflow:hidden;background:var(--ceu);aspect-ratio:4/5;max-width:100%}
 .arch img{width:100%;height:100%;object-fit:cover}
-.hero figure{margin:0;position:relative}
+.hero figure{margin:0;position:relative;width:100%;max-width:520px;justify-self:end}
 .hero figcaption{position:absolute;left:14px;bottom:14px;background:var(--papel);color:var(--azulejo);padding:8px 12px}
-@media (max-width:700px){.hero .wrap{grid-template-columns:1fr;padding-block:36px 44px;gap:32px}.hero figure{max-width:440px}}
+@media (max-width:700px){.hero .wrap{grid-template-columns:1fr;padding-block:36px 44px;gap:32px}.hero figure{max-width:440px;justify-self:start}}
 
 .tiles{height:96px;background:var(--tile);background-size:96px 96px}
 .tiles.thin{height:48px;background-size:48px 48px}
@@ -365,8 +365,8 @@ button{font:inherit;cursor:pointer}
       </div>
     </div>
     <figure>
-      <div class="arch"><img src="images/breakfast.jpg" alt="A Turkish breakfast table seen from above: menemen, simit, white cheese, çılbır, tahin and pekmez, tomatoes and cucumber" width="1247" height="1500" fetchpriority="high"></div>
-      <figcaption class="label">A Sunday at my table</figcaption>
+      <div class="arch"><img src="images/meze-plate.jpg" alt="A guest digging into a meze plate: çiğ köfte with pomegranate, kısır, hummus, lemon and fresh bread" width="1400" height="1750" fetchpriority="high"></div>
+      <figcaption class="label">Meze plate at a pop-up</figcaption>
     </figure>
   </div>
 </section>
